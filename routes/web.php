@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +16,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return view('index');
+Route::get('/login', function(){
+    if (Auth::check()) {
+        return redirect('/');
+    }else{
+        return view('users/login');
+    }
+})->name('login');
+Route::get('/register', function(){
+    return view('welcome');
+});
+Route::post('/login', [UserController::class, 'login']);
+
+Route::get('/home', function () {
+    return view('dashboard');
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('home');
+
+    Route::resource('guest', GuestController::class);
+
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
