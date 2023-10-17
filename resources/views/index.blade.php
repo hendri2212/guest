@@ -126,12 +126,12 @@
     {{-- <link href="{{ asset('resources/css/dashboard.css') }}" rel="stylesheet"> --}}
 
 
-    {{-- <link rel="stylesheet" href="https://getbootstrap.com/docs/5.3/examples/sidebars/sidebars.css"> --}}
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/5.3/examples/sidebars/sidebars.css">
 
     {{-- @vite('resources/css/app.css') --}}
+    {{-- @vite('./resources/css/dashboard.css') --}}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    @vite('resources/css/dashboard.css')
 </head>
 
 <body>
