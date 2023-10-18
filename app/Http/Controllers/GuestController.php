@@ -78,7 +78,11 @@ class GuestController extends Controller
      */
     public function update(Request $request, Guest $guest)
     {
-        //
+        $guest = Guest::findOrFail($guest);
+        $guest->insentive = '1';
+        $guest->save();
+        // $guests = Guest::all();
+        // return view('guest.data', ['guests' => $guests]);
     }
 
     /**
