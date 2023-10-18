@@ -39,7 +39,6 @@ Route::middleware('auth')->group(function () {
     })->name('home');
 
     Route::resource('guest', GuestController::class);
-    // Route::post('/updateStatus/{id}', [GuestController::class, 'update']);
     
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });

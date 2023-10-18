@@ -11,7 +11,7 @@
                     <th scope="col">Full Name</th>
                     <th scope="col">Phone Number</th>
                     <th scope="col">Company Name</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Insentive</th>
                     
                 </tr>
             </thead>
@@ -24,10 +24,11 @@
                     <td>{{ substr_replace($data->phone, " * * * * * * *", -7) }}</td>
                     <td>{{ $data->company }}</td>
                     <td>
-                        <form method="POST" action='/guest/' {{ $data->id }}>
+                        <form method="POST" action={{ url('guest/' . $data->id) }}>
+                            @method('PUT')
                             @csrf
                             <button type="submit" class="btn btn-sm {{ $data->insentive ? 'btn-success' : 'btn-danger' }}">
-                                {{ $data->insentive ? 'Done' : 'Undone' }}
+                                {{ $data->insentive ? 'True' : 'False' }}
                             </button>
                         </form>
                     </td>

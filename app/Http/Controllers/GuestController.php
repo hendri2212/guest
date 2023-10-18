@@ -78,11 +78,19 @@ class GuestController extends Controller
      */
     public function update(Request $request, Guest $guest)
     {
-        $guest = Guest::findOrFail($guest);
-        $guest->insentive = '1';
-        $guest->save();
-        // $guests = Guest::all();
-        // return view('guest.data', ['guests' => $guests]);
+        $guests = Guest::find($guest->id);
+
+        if ($guests->insentive == '0') {
+            $guests->update([
+                $guests->insentive = '1'
+            ]);
+        } else {
+            $guests->update([
+                $guests->insentive = '0'
+            ]);
+        }
+
+        return redirect('guest');
     }
 
     /**
