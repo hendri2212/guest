@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone', 15);
             $table->string('company', 100);
             $table->enum('insentive', [0, 1])->default(0);
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

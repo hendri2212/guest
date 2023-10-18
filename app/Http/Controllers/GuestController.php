@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guest;
 use Illuminate\Http\Request;
+use Storage;
 
 class GuestController extends Controller
 {
@@ -78,11 +79,28 @@ class GuestController extends Controller
      */
     public function update(Request $request, Guest $guest)
     {
+        $img = $request->image;
+        $folderPath = "uploads/";
+        
+        $image_parts = explode(";base64,", $img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = uniqid() . '.png';
+        
+        $file = $folderPath . $fileName;
+        Storage::put($file, $image_base64);
+        
+        // dd('Image uploaded successfully: '.$fileName);
+
+
         $guests = Guest::find($guest->id);
 
         if ($guests->insentive == '0') {
             $guests->update([
-                $guests->insentive = '1'
+                $guests->insentive = '1',
+                $guests->image = $fileName
             ]);
         } else {
             $guests->update([
