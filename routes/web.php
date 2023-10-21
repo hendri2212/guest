@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\GuestController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
     })->name('home');
 
     Route::resource('guest', GuestController::class);
+    Route::get('/report', [ReportController::class, 'index']);
     
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });

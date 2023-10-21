@@ -307,7 +307,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 text-white" href="#">
+                                <a class="nav-link d-flex align-items-center gap-2 text-white" href="/report">
                                     <svg class="bi">
                                         <use xlink:href="#graph-up" />
                                     </svg>
