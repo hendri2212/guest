@@ -14,10 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('guests', function (Blueprint $table) {
-            $table->unsignedBigInteger('company_id')->after('company')->index();
-
-            // $table->foreign('company_id')->references('id')->on('companies');
-            // ->onDelete("NO ACTION");
+            $table->unsignedBigInteger('company_id')->after('company')->nullable()->index();
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');
         });
     }
 
@@ -29,8 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('guests', function (Blueprint $table) {
-            $table->dropColumn('company_id'); 
-            // $table->dropForeign('company_id');
+            // 
         });
     }
 };
