@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Guest;
 use App\Models\Report;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 
 class ReportController extends Controller
@@ -16,9 +18,42 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $guest = Guest::all()->groupBy('company');
+        $query = Guest::query();
+        $date = $request->filter_tanggal;
+
+        switch($date){
+            case 'hari_ini':
+                $query->whereDate('created_at', Carbon::today());
+                break;
+            case 'kemaren':
+                $query->whereDate('created_at', Carbon::yesterday());
+                break;
+            case 'minggu_ini':
+                $query->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                break;
+            case 'minggu_kemaren':
+                $query->whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()]);
+                break;
+            case 'bulan_ini':
+                $query->whereMonth('created_at', Carbon::now()->month);
+                break;
+            case 'bulan_kemaren':
+                $query->whereMonth('created_at', Carbon::now()->subMonth()->month);
+                break;
+        }
+
+        $guest = $query->get()->groupBy('company');
+
+        $guestCompany = Guest::select('company')->distinct()->count();
+        $guestFull_name = Guest::select('full_name')->distinct()->count();
+
+        return response()->view('report.data', compact('guest', 'guestCompany', 'guestFull_name'));
+
+        // $guest = Guest::all()->groupBy('company');
+
+        // return response()->view('report.data', compact('guest', 'guestCompany', 'guestFull_name'));
 
         // $data = \DB::table('guests')->select([
         //     \DB::raw('count(*) as jumlah'),
@@ -31,10 +66,9 @@ class ReportController extends Controller
         // dd($data);
 
         // $report = Guest::all();
-        $guestCompany = Guest::select('company')->distinct()->count();
-        $guestFull_name = Guest::select('full_name')->distinct()->count();
+        
 
-        return view('report.data', compact('guest', 'guestCompany', 'guestFull_name'));
+        
     }
 
     /**
@@ -54,8 +88,7 @@ class ReportController extends Controller
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function show(Report $report)
-    {
+    public function show(Report $report){
         //
     }
 

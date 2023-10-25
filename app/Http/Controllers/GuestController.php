@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Storage;
 use App\Models\Guest;
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
@@ -121,4 +123,16 @@ class GuestController extends Controller
     {
         //
     }
+
+    // public function countTanggal(Request $request){
+    //     $data = \DB::table('guests')->select([
+    //         \DB::raw('count(full_name) as jumlah'),
+    //         // \DB::raw('full_name as data'),
+    //         \DB::raw('DATE(created_at) as tanggal')
+    //     ])
+    //     ->groupBy('tanggal')
+    //     // ->groupBy('tanggal', 'full_name')
+    //     ->get();
+    //     dd($data);
+    // }
 }

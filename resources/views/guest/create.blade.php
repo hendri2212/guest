@@ -47,6 +47,7 @@
                     </div>
                     <button type="submit" class="btn btn-lg btn-success float-end">Simpan</button>
                 </form>
+                <button class="btn btn-lg btn-danger float-end position-absolute bottom-0"><a href="/"><font color="white">back</font></a></button>
             </div>
         </div>
     </section>
