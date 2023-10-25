@@ -17,7 +17,8 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $guests = Guest::all();
+        // $guests = Guest::all();
+        $guests = Guest::with('perusahaan')->get();
         return view('guest.data', ['guests' => $guests]);
     }
 

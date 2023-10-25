@@ -16,4 +16,12 @@ class Guest extends Model
         'company'
         // '_token'
     ];
+
+    public function Company() {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function perusahaan(){
+        return $this->Company();
+    }
 }
