@@ -83,7 +83,7 @@ class GuestController extends Controller
     public function update(Request $request, Guest $guest)
     {
         $img = $request->image;
-        $folderPath = "uploads/";
+        $folderPath = "public/uploads/";
         
         $image_parts = explode(";base64,", $img);
         $image_type_aux = explode("image/", $image_parts[0]);

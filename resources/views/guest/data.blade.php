@@ -12,6 +12,7 @@
                     <th scope="col">Phone Number</th>
                     <th scope="col">Company Name</th>
                     <th scope="col">Insentive</th>
+                    <th scope="col">foto</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +33,7 @@
                             <input type="hidden" name="image" class="image-tag">
                         </form>
                     </td>
+                    <td><img src="{{ Storage::url('uploads/'.$data->image) }}" alt="{{ $data->image }}"></td>
                 </tr>
                 @endforeach
             </tbody>
