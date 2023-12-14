@@ -12,7 +12,7 @@
                     <th scope="col">Phone Number</th>
                     <th scope="col">Company Name</th>
                     <th scope="col">Insentive</th>
-                    <th scope="col">foto</th>
+                    <th scope="col">Image</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +33,13 @@
                             <input type="hidden" name="image" class="image-tag">
                         </form>
                     </td>
-                    <td><img src="{{ Storage::url('uploads/'.$data->image) }}" alt="{{ $data->image }}"></td>
+                    <td>
+                        @if ((Storage::url('uploads/'.$data->image).response()==404))
+                            hasil
+                        @else
+                            <img src="{{ Storage::url('uploads/'.$data->image) }}" alt="{{ $data->image }}">
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -41,6 +47,7 @@
         <div id="my_camera" style="position: absolute; left: -500px; top: 0px; z-index: -3;"></div>
     </div>
     <script language="JavaScript">
+        let camera = false;
         Webcam.set({
             width: 490,
             height: 350,
@@ -48,7 +55,9 @@
             jpeg_quality: 90
         });
         
-        Webcam.attach( '#my_camera' );
+        if (camera==true) {
+            Webcam.attach( '#my_camera' );
+        }
         
         function take_snapshot() {
             Webcam.snap( function(data_uri) {

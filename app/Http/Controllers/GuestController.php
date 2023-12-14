@@ -19,7 +19,16 @@ class GuestController extends Controller
     {
         // $guests = Guest::all();
         $guests = Guest::with('perusahaan')->get();
-        return view('guest.data', ['guests' => $guests]);
+        // return view('guest.data', ['guests' => $guests]);
+        // assume $photo works 
+        // try {
+            // return Storage::get('uploads/'.$guests->image);
+            return $guests['image'];
+        // }
+        // catch (Exception $e) {
+        //     $photo->delete(); // doesn't come here
+        // }
+    
     }
 
     /**

@@ -31,8 +31,10 @@
             <div class="col-md-6 col-sm-12 p-3">
                 <h2 class="text-uppercase fw-bold">Data Tamu</h2>
                 <p class="text-secondary">Tidak perlu buru - buru, silahkan ketik data tamu dengan benar dan lengkap</p>
-                <form class="pt-3" action="/guest" method="POST">
+                {{-- <form class="pt-3" action="/guest" method="POST"> --}}
+                <form class="pt-3" action="/simpan" method="POST">
                     @csrf
+                    {{-- @method('post') --}}
                     <div class="mb-3">
                         <label for="full_name" class="form-label">Nama Lengkap</label>
                         <input type="text" name="full_name" class="form-control form-control-lg rounded-0 border-secondary" id="full_name" aria-describedby="emailHelp">

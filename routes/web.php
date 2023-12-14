@@ -40,9 +40,13 @@ Route::middleware('auth')->group(function () {
     })->name('home');
 
     Route::resource('guest', GuestController::class);
+    // Route::resource('guest', 'GuestController', ['except' => ['create', 'store']]);
+    // Route::resource('guest', 'GuestController', ['only' => ['index', 'show', 'update', 'destroy', 'edit']]);
     Route::get('/report', [ReportController::class, 'index']);
     
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
+Route::get('/daftar', [GuestController::class, 'create']);
+Route::post('/simpan', [GuestController::class, 'store']);
 route::get('/count', [GuestController::class, 'countTanggal']);
