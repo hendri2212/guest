@@ -39,16 +39,23 @@ class GuestController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'full_name' => 'required',
-            'phone' => 'required',
-            'company' => 'required',
+        // $request->validate([
+        //     'full_name' => 'required',
+        //     'phone' => 'required',
+        //     'company' => 'required',
+        // ]);
+        
+        Guest::create([
+            'full_name' => $request->full_name,
+            'phone' => $request->phone,
+            'company' => 'Hari jadi Kotabaru 74 tahun 2024'
         ]);
 
-        Guest::create($request->all());
+        // Guest::create($request->all());
 
         // Set a success message
-        $successMessage = 'Post created or updated successfully!';
+        // $successMessage = 'Post created or updated successfully!';
+        $successMessage = 'Terimakasih sudah berkunjung, semoga sehat selalu!';
 
         // If we are using a modal, set the modal title and body
         // if ($request->has('modal')) {
@@ -58,7 +65,8 @@ class GuestController extends Controller
 
         // Return a success response
         // return redirect()->route('guest.create')->with([
-        return view('guest.create')->with([
+        return redirect()->away('daftar')->with([
+        // return view('guest.create')->with([
             'success' => $successMessage,
             'modalTitle' => $modalTitle ?? null,
             'modalBody' => $modalBody ?? null,
