@@ -13,7 +13,7 @@
     <section class="container border shadow-lg">
         <div class="row">
             <div class="p-3">
-                <img src="https://gekrafs.com/wp-content/uploads/2022/08/Profile-Gekrafs-IV.png" alt="banner-gekrafs" class="img-fluid rounded-4">
+                <img src="../assets/Profile-Gekrafs.webp" alt="banner-gekrafs" class="img-fluid rounded-4">
                 <div class="card mt-3 p-3 bg-light">
                     <h2 class="text-uppercase fw-bold">Data Tamu</h2>
                     <p class="text-secondary">Tidak perlu buru - buru, silahkan ketik data pian dengan benar dan lengkap</p>
