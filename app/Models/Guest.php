@@ -13,7 +13,8 @@ class Guest extends Model
     protected $fillable = [
         'full_name',
         'phone',
-        'company'
+        'company',
+        'company_id',
         // '_token'
     ];
 

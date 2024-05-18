@@ -10,14 +10,13 @@
     {{-- @vite('resources/css/app.css') --}}
 </head>
 <body>
-    <section class="container border shadow-lg">
+    <section class="container">
         <div class="row">
             <div class="p-3">
                 <img src="../assets/Profile-Gekrafs.webp" alt="banner-gekrafs" class="img-fluid rounded-4">
                 <div class="card mt-3 p-3 bg-light">
                     <h2 class="text-uppercase fw-bold">Data Tamu</h2>
                     <p class="text-secondary">Tidak perlu buru - buru, silahkan ketik data pian dengan benar dan lengkap</p>
-                    {{-- <form class="pt-3" action="/guest" method="POST"> --}}
                     <form class="pt-3" action="/simpan" method="POST">
                         @csrf
                         {{-- @method('post') --}}
@@ -40,19 +39,21 @@
         </div>
     </section>
 
-    @if (isset($modalTitle) && isset($modalBody))
+    @if (isset($modalTitle) && isset($modalBody) && isset($date))
         <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="successModalLabel">{{ $modalTitle }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="javascript:window.location='/daftar'"></button>
                     </div>
                     <div class="modal-body">
                         {{ $modalBody }}
+                        <br><br>
+                        Silahkan mengikuti undian berhadiah di boot Gekrafs Kotabaru dengan batas waktu {{ $date }}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="javascript:window.location='/daftar'">Close</button>
                     </div>
                 </div>
             </div>

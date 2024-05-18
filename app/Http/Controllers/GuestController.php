@@ -7,6 +7,8 @@ use App\Models\Guest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+// Carbon::setLocale('id');
 
 class GuestController extends Controller
 {
@@ -19,11 +21,11 @@ class GuestController extends Controller
     {
         // $guests = Guest::all();
         $guests = Guest::with('perusahaan')->get();
-        // return view('guest.data', ['guests' => $guests]);
+        return view('guest.data', ['guests' => $guests]);
         // assume $photo works 
         // try {
-            // return Storage::get('uploads/'.$guests->image);
-            return $guests['image'];
+        //     return Storage::get('uploads/'.$guests->image);
+            // return $guests['image'];
         // }
         // catch (Exception $e) {
         //     $photo->delete(); // doesn't come here
@@ -43,36 +45,27 @@ class GuestController extends Controller
         //     'full_name' => 'required',
         //     'phone' => 'required',
         //     'company' => 'required',
+        //     'company_id' => 'required'
         // ]);
         
         Guest::create([
             'full_name' => $request->full_name,
             'phone' => $request->phone,
-            'company' => 'Hari jadi Kotabaru 74 tahun 2024'
+            'company' => 'Pengunjung hari jadi Kotabaru 74 tahun 2024',
+            'company_id' => 12
         ]);
 
         // Guest::create($request->all());
 
         // Set a success message
-        // $successMessage = 'Post created or updated successfully!';
-        $successMessage = 'Terimakasih sudah berkunjung, semoga sehat selalu!';
+        $modalTitle = 'Success!';
+        $modalBody = 'Terimakasih sudah berkunjung. semoga sehat selalu!';
 
-        // If we are using a modal, set the modal title and body
-        // if ($request->has('modal')) {
-            $modalTitle = 'Success!';
-            $modalBody = $successMessage;
-        // }
-
-        // Return a success response
-        // return redirect()->route('guest.create')->with([
-        return redirect()->away('daftar')->with([
-        // return view('guest.create')->with([
-            'success' => $successMessage,
+        return view('guest.create')->with([
             'modalTitle' => $modalTitle ?? null,
             'modalBody' => $modalBody ?? null,
+            'date' => Carbon::now()->endOfDay()->isoFormat('D MMMM Y - hh:mm:ss')
         ]);
-
-        // return redirect()->route('home')->with('success', 'Post created successfully!');
     }
 
     function create(){
